@@ -7,7 +7,7 @@ var http = require('http');
 var app = express();
 port = process.env.PORT || 1337;
 //look for html, css, js, img files
-app.use(express.static(__dirname + "/client"));
+app.use(express.static(__dirname + "/Client"));
 
 
 // app.get('/', function(req, res) {
