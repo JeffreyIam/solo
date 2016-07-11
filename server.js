@@ -1,17 +1,18 @@
 var express = require('express');
-var path = require('path');
-var logger = require('morgan');
-var http = require('http');
+var bodyParser = require('body-parser');
+var request = require('request');
 
 
 var app = express();
 
-port = process.env.PORT || 1337;
+var port = process.env.PORT || 1337;
 
-var server = http.createServer(function(req,res){
-  res.writeHeader(200,{"Content-Type": "text/plain"});
-  res.write("Heyooo");
-  res.end();
-});
-server.listen(port);
+app.use(bodyParser.json());
+
+app.listen(port);
+
 console.log("server running on ", port )
+
+app.get('/', function(req, res) {
+  res.send("hi! from server.js")
+});
