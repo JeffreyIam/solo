@@ -2,27 +2,32 @@ var express = require('express');
 var path = require('path');
 var logger = require('morgan');
 var http = require('http');
-
-//var table = require('./mongo.js')
-var mongojs = require('mongojs');
-var db = mongojs('foodlist', ['foodlist']);
+var mongoose = require('mongoose');
+var table = require('./mongo.js');
+// var db = mongojs('foodlist', ['foodlist']);
 var bodyParser = require('body-parser');
 
 var app = express();
 
+var foodlist = mongoose.model('foodList',table.Food);
+
+// var pert = process.env.MONGODB_URI || "mongodb://localhost/solodolo";
+// mongoose.connect(pert);
 //look for html, css, js, img files
 app.use(express.static(__dirname + "/Client"));
 app.use(bodyParser.json());
 
 app.get('/foodlist', function(req, res) {
-  db.foodlist.find(function(err,data) {
+  foodlist.find({},function(err,data) {
+    console.log('getting from server.js')
     res.json(data);
   });
 });
 
 app.post('/foodlist', function(req, res) {
   console.log(req.body);
-  db.foodlist.insert(req.body, function(err, data) {
+  console.log('received post request')
+  foodlist.insert(req.body, function(err, data) {
     res.json(data);
   })
 });
@@ -30,14 +35,15 @@ app.post('/foodlist', function(req, res) {
 app.delete('/foodlist/:id', function(req, res) {
   var id = req.params.id;
   console.log(id);
-  db.foodlist.remove({_id: mongojs.ObjectId(id)}, function(err, data) {
+  foodlist.remove({_id: id}, function(err, data) {
     res.json(data);
   })
 });
 
 app.get('/foodlist/:id', function(req,res) {
   var id = req.params.id;
-  db.foodlist.findOne({_id: mongojs.ObjectId(id)}, function(err, data) {
+  console.log(id);
+  foodlist.findOne({_id: id}, function(err, data) {
     res.json(data);
   })
 });
@@ -45,7 +51,7 @@ app.get('/foodlist/:id', function(req,res) {
 app.put('/foodlist/:id', function(req, res) {
   var id = req.params.id;
   console.log(id);
-  db.foodlist.findAndModify({query: {_id: mongojs.ObjectId(id)},
+  foodlist.findAndModify({query: {_id: id},
     update: {$set: {food: req.body.food, weight: req.body.weight, calories: req.body.calories}},
     new: true}, function(err, data) {
       res.json(data);

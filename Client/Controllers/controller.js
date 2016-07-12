@@ -5,8 +5,12 @@ myFood.controller('FoodCtrl',function($scope, $http) {
 
 
 var refresh = function() {
-  $http.get('/foodlist').success(function(res) {
-    console.log("got data req");
+  // $http.get('/foodlist')
+  return $http({
+    method: 'GET',
+    url: '/foodlist'
+    }).success(function(res) {
+    console.log("refreshed from controller");
     $scope.foodlist = res;
     $scope.food = "";
   });
@@ -14,12 +18,18 @@ var refresh = function() {
 
 refresh();
 
-  $scope.addFood = function() {
-    console.log("ahhhh", $scope.food);
-    $http.post('/foodlist', $scope.food).success(function(res) {
-      console.log(res);
-      refresh();
+  $scope.addFood = function(food) {
+    console.log("addFood from controller", $scope.food);
+     $http({
+      method: 'POST',
+      url: '/foodlist',
+      data: {food: $scope.food, weight: $scope.weight, calories:$scope.calories}
+    // $http.post('/foodlist', $scope.food).success(function(res) {
+      // console.log(res);
+      // console.log('hi from controller')
     });
+    console.log('sent post request');
+    refresh();
   };
 
   $scope.remove = function(id) {
@@ -37,8 +47,9 @@ refresh();
   }
 
   $scope.update = function() {
-    console.log($scope.food._id);
-    console.log('updatingggg');
+    console.log($scope);
+    console.log($scope.food._id + "from controller");
+    console.log('updating from controller');
     $http.put('foodlist/' + $scope.food._id, $scope.food).success(function(res) {
       refresh();
     })
