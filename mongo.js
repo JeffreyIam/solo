@@ -34,7 +34,3 @@ module.exports = Food;
 new Food({name: "Chicken", weight: 32, calories: 355}).save(function() {
   console.log('successfully saved chicken')
 });
-new Food({name: "Turkey", weight: 32, calories: 355}).save(function() {
-  console.log('successfully saved turkey')
-});
-

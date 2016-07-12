@@ -11,11 +11,6 @@ var app = express();
 
 var foodlist = mongoose.model('foodList',table.Food);
 
-
-
-// var pert = process.env.MONGODB_URI || "mongodb://localhost/solodolo";
-// mongoose.connect(pert);
-//look for html, css, js, img files
 app.use(express.static(__dirname + "/Client"));
 app.use(bodyParser.json());
 
@@ -27,9 +22,9 @@ app.get('/foodlist', function(req, res) {
 });
 
 app.post('/foodlist', function(req, res) {
-   console.log(req.body);
+   //console.log(req.body);
   // console.log('received post request')
-  var food = new Food.Food(req.body);
+  var food = new table(req.body);
    food.save(function(err,data) {
     if(err) {
       console.log(err);
@@ -41,7 +36,7 @@ app.post('/foodlist', function(req, res) {
 
 app.delete('/foodlist/:id', function(req, res) {
   var id = req.params.id;
-  console.log(id);
+  //console.log(id);
   foodlist.remove({_id: id}, function(err, data) {
     res.json(data);
   })
@@ -49,7 +44,7 @@ app.delete('/foodlist/:id', function(req, res) {
 
 app.get('/foodlist/:id', function(req,res) {
   var id = req.params.id;
-  console.log(id);
+  //console.log(id);
   foodlist.findOne({_id: id}, function(err, data) {
     res.json(data);
   })
@@ -57,11 +52,16 @@ app.get('/foodlist/:id', function(req,res) {
 
 app.put('/foodlist/:id', function(req, res) {
   var id = req.params.id;
-  console.log(id);
-  foodlist.findAndModify({query: {_id: id},
-    update: {$set: {food: req.body.food, weight: req.body.weight, calories: req.body.calories}},
-    new: true}, function(err, data) {
-      res.json(data);
+  console.log("from server" , id);
+  foodlist.findOneAndUpdate({query: {_id: id}},
+    {$set: {food: req.body.food, weight: req.body.weight, calories: req.body.calories}},
+    {new: true}, function(err, data) {
+      if(err) {
+        console.log(err);
+      } else {
+        console.log('donezo');
+        res.json(data);
+      }
     });
 });
 

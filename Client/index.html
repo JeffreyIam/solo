@@ -30,7 +30,7 @@
           </tr>
           <tr ng-repeat="food in foodlist">
             <td>{{food.name}}</td>
-            <td>{{food.weight}}</td>
+            <td>{{food.weight}} oz</td>
             <td>{{food.calories}}</td>
             <td><button ng-click="edit(food._id)">Edit</button></td>
             <td><button ng-click="remove(food._id)">Remove Food!</button></td>
