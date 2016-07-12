@@ -27,6 +27,14 @@ app.post('/foodlist', function(req, res) {
   })
 });
 
+app.delete('/foodlist/:id', function(req, res) {
+  var id = req.params.id;
+  console.log(id);
+  db.foodlist.remove({_id: mongojs.ObjectId(id)}, function(err, data) {
+    res.json(data);
+  })
+});
+
 // app.delete('/foodlist/:id', function(req, res) {
 //   var id = req.params.id;
 //   console.log(id);

@@ -19,10 +19,16 @@ refresh();
     $http.post('/foodlist', $scope.food).success(function(res,req) {
       console.log(res);
       refresh();
+    });
+  };
+
+  $scope.remove = function(id) {
+    console.log(id);
+    $http.delete('/foodlist/' + id).success(function(res,req) {
+      console.log(res);
+      refresh();
     })
-  }
-
-
+  };
 
 
 });
