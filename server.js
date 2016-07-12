@@ -10,9 +10,5 @@ port = process.env.PORT || 1337;
 app.use(express.static(__dirname + "/Client"));
 
 
-// app.get('/', function(req, res) {
-//   res.send("hello world from server.js")
-// });
-
 app.listen(port);
 console.log("server running on ", port )
