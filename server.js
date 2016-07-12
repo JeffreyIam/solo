@@ -11,15 +11,11 @@ port = process.env.PORT || 1337;
 app.use(express.static(__dirname + "/Client"));
 
 app.get('/foodlist', function(req, res) {
-  console.log("get req");
-
   db.foodlist.find(function(err,data) {
-    console.log(data);
     res.json(data);
   });
 
 });
-
 
 app.listen(port);
 console.log("server running on ", port )
