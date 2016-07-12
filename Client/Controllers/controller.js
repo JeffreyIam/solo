@@ -23,7 +23,7 @@ refresh();
      $http({
       method: 'POST',
       url: '/foodlist',
-      data: {food: $scope.food, weight: $scope.weight, calories:$scope.calories}
+      data: $scope.food
     // $http.post('/foodlist', $scope.food).success(function(res) {
       // console.log(res);
       // console.log('hi from controller')

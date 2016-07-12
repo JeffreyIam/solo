@@ -11,6 +11,8 @@ var app = express();
 
 var foodlist = mongoose.model('foodList',table.Food);
 
+
+
 // var pert = process.env.MONGODB_URI || "mongodb://localhost/solodolo";
 // mongoose.connect(pert);
 //look for html, css, js, img files
@@ -25,11 +27,16 @@ app.get('/foodlist', function(req, res) {
 });
 
 app.post('/foodlist', function(req, res) {
-  console.log(req.body);
-  console.log('received post request')
-  foodlist.insert(req.body, function(err, data) {
-    res.json(data);
-  })
+   console.log(req.body);
+  // console.log('received post request')
+  var food = new Food.Food(req.body);
+   food.save(function(err,data) {
+    if(err) {
+      console.log(err);
+    } else {
+   console.log('successfully saved ' + data)
+    }
+ })
 });
 
 app.delete('/foodlist/:id', function(req, res) {
