@@ -49,15 +49,15 @@ th{
             <td><button class="btn btn-primary" ng-click="unselect()">Unselect</button></td>
           </tr>
           <tr ng-repeat="food in foodlist">
-            <td class="food">{{food.name}}</td>
-            <td class="food">{{food.weight}} oz</td>
-            <td class="food">{{food.calories}}</td>
+            <td class="food" ng-cloak>{{food.name}}</td>
+            <td class="food" ng-cloak >{{food.weight}} oz</td>
+            <td class="food" ng-cloak >{{food.calories}}</td>
             <td><button class="btn btn-info" ng-click="edit(food._id)">Edit</button></td>
             <td><button class="btn btn-danger" ng-click="remove(food._id)">Remove Food!</button></td>
           </tr>
         </tbody>
       </table>
-      <h4 class = "food">  Total: {{total()}} calories </h4>
+      <h4 class = "food" ng-cloak>  Total: {{total()}} calories </h4>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 <script src="Controllers/controller.js"></script>
