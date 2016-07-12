@@ -16,9 +16,17 @@
             <th>Food</th>
             <th>Weight</th>
             <th>Calories</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
+          <tr>
+            <td><input ng-model=food.name></td>
+            <td><input ng-model=food.weight></td>
+            <td><input ng-model=food.calories></td>
+            <td><button class="btn btn-primary" ng-click="addFood()">Add Food!</button>
+
+          </tr>
           <tr ng-repeat="food in foodlist">
             <td>{{food.name}}</td>
             <td>{{food.weight}}</td>

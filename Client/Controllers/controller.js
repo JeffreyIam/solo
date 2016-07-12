@@ -8,6 +8,13 @@ myFood.controller('FoodCtrl',function($scope, $http) {
     $scope.foodlist = res;
   })
 
+  $scope.addFood = function() {
+    console.log($scope.food);
+    $http.post('/foodlist').success(function(res,req) {
+      console.log(res);
+    })
+  }
+
 
 
 
