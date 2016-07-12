@@ -5,7 +5,7 @@ myFood.controller('FoodCtrl',function($scope, $http) {
 
 
 var refresh = function() {
-  $http.get('/foodlist').success(function(res,req) {
+  $http.get('/foodlist').success(function(res) {
     console.log("got data req");
     $scope.foodlist = res;
     $scope.food = "";
@@ -16,7 +16,7 @@ refresh();
 
   $scope.addFood = function() {
     console.log("ahhhh", $scope.food);
-    $http.post('/foodlist', $scope.food).success(function(res,req) {
+    $http.post('/foodlist', $scope.food).success(function(res) {
       console.log(res);
       refresh();
     });
@@ -24,11 +24,29 @@ refresh();
 
   $scope.remove = function(id) {
     console.log(id);
-    $http.delete('/foodlist/' + id).success(function(res,req) {
+    $http.delete('/foodlist/' + id).success(function(res) {
       console.log(res);
       refresh();
     })
   };
+
+  $scope.edit = function(id) {
+    $http.get('/foodlist/' + id).success(function(res) {
+      $scope.food = res;
+    });
+  }
+
+  $scope.update = function() {
+    console.log($scope.food._id);
+    console.log('updatingggg');
+    $http.put('foodlist/' + $scope.food._id, $scope.food).success(function(res) {
+      refresh();
+    })
+  }
+  //need to add to fix problem with editing food..
+  $scope.unselect = function() {
+    $scope.food = "";
+  }
 
 
 });

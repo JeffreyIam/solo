@@ -24,13 +24,15 @@
             <td><input ng-model=food.name></td>
             <td><input ng-model=food.weight></td>
             <td><input ng-model=food.calories></td>
-            <td><button class="btn btn-primary" ng-click="addFood()">Add Food!</button>
-
+            <td><button class="btn btn-primary" ng-click="addFood()">Add Food!</button></td>
+            <td><button class="btn btn-primary" ng-click="update()">Update!</button></td>
+            <td><button class="btn btn-primary" ng-click="unselect()">Unselect</button></td>
           </tr>
           <tr ng-repeat="food in foodlist">
             <td>{{food.name}}</td>
             <td>{{food.weight}}</td>
             <td>{{food.calories}}</td>
+            <td><button ng-click="edit(food._id)">Edit</button></td>
             <td><button ng-click="remove(food._id)">Remove Food!</button></td>
           </tr>
         </tbody>

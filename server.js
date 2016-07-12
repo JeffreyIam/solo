@@ -35,10 +35,22 @@ app.delete('/foodlist/:id', function(req, res) {
   })
 });
 
-// app.delete('/foodlist/:id', function(req, res) {
-//   var id = req.params.id;
-//   console.log(id);
-// })
+app.get('/foodlist/:id', function(req,res) {
+  var id = req.params.id;
+  db.foodlist.findOne({_id: mongojs.ObjectId(id)}, function(err, data) {
+    res.json(data);
+  })
+});
+
+app.put('/foodlist/:id', function(req, res) {
+  var id = req.params.id;
+  console.log(id);
+  db.foodlist.findAndModify({query: {_id: mongojs.ObjectId(id)},
+    update: {$set: {food: req.body.food, weight: req.body.weight, calories: req.body.calories}},
+    new: true}, function(err, data) {
+      res.json(data);
+    });
+});
 
 var port = process.env.PORT || 1337;
 app.listen(port, function() {
