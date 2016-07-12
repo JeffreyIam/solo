@@ -5,7 +5,27 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
-  <title>Food Calorie App</title>
+<style>
+body{
+  background-image: url("https://farm2.staticflickr.com/1548/25046454575_22b8c77803_b.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+h1{
+  font-size: 150%;
+  font-style: bold;
+}
+th{
+  font-size: 150%;
+  font-style: bold;
+}
+.food{
+  font-size: 200%;
+  color: white;
+}
+</style>
+
+  <title class="title">Food Calorie App</title>
 </head>
 <body>
   <div class="container" ng-controller="FoodCtrl">
@@ -14,7 +34,7 @@
         <thead>
           <tr>
             <th>Food</th>
-            <th>Weight</th>
+            <th>Weight in oz</th>
             <th>Calories</th>
             <th>Action</th>
           </tr>
@@ -24,20 +44,20 @@
             <td><input ng-model=food.name></td>
             <td><input ng-model=food.weight></td>
             <td><input ng-model=food.calories></td>
-            <td><button class="btn btn-primary" ng-click="addFood(food)">Add Food!</button></td>
-            <td><button class="btn btn-primary" ng-click="update()">Update!</button></td>
+            <td><button class="btn btn-primary" ng-click="addFood(food)">Add Food</button></td>
+            <td><button class="btn btn-primary" ng-click="update(food)">Update</button></td>
             <td><button class="btn btn-primary" ng-click="unselect()">Unselect</button></td>
           </tr>
           <tr ng-repeat="food in foodlist">
-            <td>{{food.name}}</td>
-            <td>{{food.weight}} oz</td>
-            <td>{{food.calories}}</td>
-            <td><button ng-click="edit(food._id)">Edit</button></td>
-            <td><button ng-click="remove(food._id)">Remove Food!</button></td>
+            <td class="food">{{food.name}}</td>
+            <td class="food">{{food.weight}} oz</td>
+            <td class="food">{{food.calories}}</td>
+            <td><button class="btn btn-info" ng-click="edit(food._id)">Edit</button></td>
+            <td><button class="btn btn-danger" ng-click="remove(food._id)">Remove Food!</button></td>
           </tr>
         </tbody>
       </table>
-      Total: <span> {{total()}} calories </span>
+      <h4 class = "food">  Total: {{total()}} calories </h4>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 <script src="Controllers/controller.js"></script>
