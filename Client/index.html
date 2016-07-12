@@ -14,9 +14,17 @@
         <thead>
           <tr>
             <th>Food</th>
+            <th>Weight</th>
             <th>Calories</th>
           </tr>
         </thead>
+        <tbody>
+          <tr ng-repeat="food in foodlist">
+            <td>{{food.name}}</td>
+            <td>{{food.weight}}</td>
+            <td>{{food.calories}}</td>
+          </tr>
+        </tbody>
       </table>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
