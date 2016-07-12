@@ -48,5 +48,15 @@ refresh();
     $scope.food = "";
   }
 
+  $scope.total = function() {
+  var total = 0;
+  angular.forEach($scope.foodlist, function(food) {
+    //if(food.active) {
+      total += food.calories;
+   // }
+  });
+  return total;
+  }
+
 
 });
