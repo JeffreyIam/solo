@@ -55,18 +55,10 @@ myFood.controller('FoodCtrl', function($scope, $http) {
     }
     $scope.protein = function() {
         var protein = 0;
+        var ppp = {chicken:7.75, turkey: 8, steak: 5,salmon: 5.1, spinich: 0.81, lettuce: 0.24}
         angular.forEach($scope.foodlist, function(food) {
-          if(food.name === 'chicken') {
-            console.log('hi chicken')
-            protein += food.weight * 7.75;
-          } else if(food.name === 'turkey') {
-            protein += food.weight * 8;
-          } else if(food.name === 'steak') {
-            protein += food.weight * 5;
-          } else if(food.name === 'salmon') {
-            protein += food.weight * 5.1;
-          }
+          protein += food.weight * ppp[food.name];
         });
-          return protein;
+        return protein;
     }
 });
